@@ -5,42 +5,48 @@
 //  Created by Paul Cefalu on 1/30/14.
 //
 //
-#include <SimpleAudioEngine.h>
 //#include <Box2D/Box2D.h>
 #include <iostream>
 
 #include "MscConstants.h"
+#include "SimpleAudioEngine.h"
 #include "MainScene.h"
 #include "HomeScene.h"
 
 USING_NS_CC;
 
-
 //============================================================================
-Scene* HomeScene::createScene()
+HomeScene::HomeScene()
 { // Declare Variables
   //--------------------------------------------------
   
-  // 'scene' is an autorelease object
-  auto scene = Scene::create();
-  
-  // 'layer' is an autorelease object
-  auto layer = HomeScene::create();
-
-  // add layer as a child to scene
-  scene->addChild(layer);
-  
-  // return the scene
-  return scene;
+//  m_poMainScene = MainScene::createScene();
   
   //--------------------------------------------------
-} // End of createScene Method
+} // End of Constructor Method
+
+
+//============================================================================
+HomeScene::~HomeScene()
+{ // Declare Variables
+  //--------------------------------------------------
+  
+//  this->unscheduleAllSelectors();
+//  this->getEventDispatcher()->removeAllEventListeners();
+//  
+//  m_poMainScene->release();
+  
+  //--------------------------------------------------
+} // End of Destructor Method
 
 
 //============================================================================
 bool HomeScene::init()
 { // on "init" you need to initialize your instance
   //--------------------------------------------------
+  
+  float  sngHorzSkew    = 0;
+  float  sngVertSkew    = 0;
   
   if( !LayerColor::initWithColor(Color4B(255, 255, 255, 255)) ) //RGBA
   {
@@ -55,8 +61,10 @@ bool HomeScene::init()
   //--------------------------------------------------
   auto ExitItem = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(HomeScene::menuExitCallback, this));
   
-	ExitItem->setPosition(Point(origin.x + visibleSize.width - ExitItem->getContentSize().width/2 ,
-                               origin.y + ExitItem->getContentSize().height/2));
+  sngHorzSkew    = visibleSize.width - ExitItem->getContentSize().width/2;
+  sngVertSkew    = ExitItem->getContentSize().height/2;
+
+	ExitItem->setPosition(Point(origin.x -20 + sngHorzSkew, origin.y + 20 + sngVertSkew));
   
   auto ExitButton = Menu::create(ExitItem, NULL);
   ExitButton->setPosition(Point::ZERO);
@@ -68,8 +76,9 @@ bool HomeScene::init()
   auto playItem = MenuItemImage::create("Play Button.png", "Play Button.png", CC_CALLBACK_1(HomeScene::menuPlayCallback, this));
   playItem->setScale(.75, .5);
 
-  float sngHorzSkew = playItem->getContentSize().width/2 + 10 + (visibleSize.width - playItem->getContentSize().width)/2;
-  float sngVertSkew = playItem->getContentSize().height/2;
+  sngHorzSkew = playItem->getContentSize().width/2 + 10 + (visibleSize.width - playItem->getContentSize().width)/2;
+  sngVertSkew = playItem->getContentSize().height/2;
+  
 	playItem->setPosition(Point(origin.x + sngHorzSkew, origin.y + sngVertSkew));
   
   auto buttonItem = Menu::create(playItem, NULL);
@@ -77,31 +86,41 @@ bool HomeScene::init()
   this->addChild(buttonItem, 1);
   
   
-  // Create Background
-  //--------------------------------------------------
-  auto label = LabelTTF::create("Home Scene", "Arial", 24);
-  
-  // position the label on the center of the screen
-  label->setPosition(Point(origin.x + visibleSize.width/2,
-                           origin.y + visibleSize.height - label->getContentSize().height));
-  
-  // add the label as a child to this layer
-  this->addChild(label, 1);
-  
   // Create and Configure Background of Scene
+  //--------------------------------------------------
   auto sprite = Sprite::create("HomeScene.png");
   
-  // position the sprite on the center of the screen
-  sprite->setPosition(Point(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-  sprite->setScale(FULL_SCREEN_HORIZONTAL_SCALE, FULL_SCREEN_VERTICAL_SCALE);
+  sngHorzSkew = visibleSize.width/2;
+  sngVertSkew = visibleSize.height/2;
   
-  // add the sprite as a child to this layer
+  sprite->setPosition(Point(origin.x + sngHorzSkew, origin.y + sngVertSkew));
   this->addChild(sprite, 0);
   
   return true;
   
   //--------------------------------------------------
 } // End of init Method
+
+
+//============================================================================
+Scene* HomeScene::createScene()
+{ // Declare Variables
+  //--------------------------------------------------
+  
+  // 'scene' is an autorelease object
+  auto scene = Scene::create();
+  
+  // 'layer' is an autorelease object
+  auto layer = HomeScene::create();
+  
+  // add layer as a child to scene
+  scene->addChild(layer);
+  
+  // return the scene
+  return scene;
+  
+  //--------------------------------------------------
+} // End of createScene Method
 
 
 //============================================================================
@@ -117,7 +136,7 @@ void HomeScene::PlayButtonClick()
 
 
 //============================================================================
-void HomeScene::menuExitCallback(Object* pSender)
+void HomeScene::menuExitCallback(Object *pSender)
 { // Declare Variables
   //--------------------------------------------------
   
@@ -133,7 +152,7 @@ void HomeScene::menuExitCallback(Object* pSender)
 
 
 //============================================================================
-void HomeScene::menuPlayCallback(Object* pSender)
+void HomeScene::menuPlayCallback(Object *pSender)
 { // Declare Variables
   //--------------------------------------------------
   

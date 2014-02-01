@@ -16,8 +16,15 @@
 class HomeScene : public cocos2d::LayerColor
 { // Class Data Members
   //--------------------------------------------------
-  
+private:
+//  cocos2d::Scene *m_poMainScene = nullptr;
+
 public:
+  
+  HomeScene();
+  ~HomeScene();
+  
+  
   // there's no 'id' in cpp, so we recommend returning the class instance pointer
   static cocos2d::Scene* createScene();
   
@@ -25,8 +32,8 @@ public:
   virtual bool init();
   
   // a selector callback
-  void menuExitCallback(Object* pSender);
-  void menuPlayCallback(Object* pSender);
+  void menuExitCallback(Object *pSender);
+  void menuPlayCallback(Object *pSender);
   
   void PlayButtonClick();
   

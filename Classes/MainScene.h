@@ -33,13 +33,18 @@ private:
   };
   
   
-  eBidTypes           m_eBidType     = NoBid;
-  eStatusTypes        m_eStatusType  = Inactive;
+  eBidTypes       m_eBidType     = NoBid;
+  eStatusTypes    m_eStatusType  = Inactive;
   
-  cocos2d::LabelTTF  *m_BidLabel     = nullptr;
-  cocos2d::LabelTTF  *m_StatusLabel  = nullptr;
+  const int       m_BidTagID     = 1;
+  const int       m_StatusTagID  = 2;
   
 public:
+  
+  MainScene();
+  ~MainScene();
+  
+  
   // there's no 'id' in cpp, so we recommend returning the class instance pointer
   static cocos2d::Scene* createScene();
 
@@ -47,11 +52,11 @@ public:
   virtual bool init();  
   
   // a selector callback
-  void menuExitCallback(Object* pSender);
-  void menuOddCallback(Object* pSender);
-  void menuSevenCallback(Object* pSender);
-  void menuEvenCallback(Object* pSender);
-  void menuRollCallback(Object* pSender);
+  void menuExitCallback(Object *pSender);
+  void menuOddCallback(Object *pSender);
+  void menuSevenCallback(Object *pSender);
+  void menuEvenCallback(Object *pSender);
+  void menuRollCallback(Object *pSender);
 
   void PlayButtonClick();
   void Tick(float dt);
