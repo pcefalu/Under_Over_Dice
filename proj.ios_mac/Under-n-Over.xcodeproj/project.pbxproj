@@ -105,6 +105,7 @@
 		CE7ECAFD189F345B000AA33B /* Happy Sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECAFB189F345B000AA33B /* Happy Sound.mp3 */; };
 		CE7ECAFE189F345B000AA33B /* Sorry Sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECAFC189F345B000AA33B /* Sorry Sound.wav */; };
 		CE7ECB02189F3DD6000AA33B /* Dice Rolling.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECB01189F3DD6000AA33B /* Dice Rolling.wav */; };
+		CE7ECB04189F7A0F000AA33B /* Dice Dropping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECB03189F7A0F000AA33B /* Dice Dropping.mp3 */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -375,6 +376,7 @@
 		CE7ECAFB189F345B000AA33B /* Happy Sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Happy Sound.mp3"; path = "../Sounds/Happy Sound.mp3"; sourceTree = "<group>"; };
 		CE7ECAFC189F345B000AA33B /* Sorry Sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Sorry Sound.wav"; path = "../Sounds/Sorry Sound.wav"; sourceTree = "<group>"; };
 		CE7ECB01189F3DD6000AA33B /* Dice Rolling.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Dice Rolling.wav"; path = "../Sounds/Dice Rolling.wav"; sourceTree = "<group>"; };
+		CE7ECB03189F7A0F000AA33B /* Dice Dropping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Dice Dropping.mp3"; path = "../Sounds/Dice Dropping.mp3"; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -587,6 +589,7 @@
 				CE7ECAD6189CAAB7000AA33B /* Images.xcassets */,
 				CE7ECAAD189C8E65000AA33B /* Graphics */,
 				CE7ECB01189F3DD6000AA33B /* Dice Rolling.wav */,
+				CE7ECB03189F7A0F000AA33B /* Dice Dropping.mp3 */,
 				CE7ECAF1189E2A56000AA33B /* Floor.png */,
 				CE7ECAFB189F345B000AA33B /* Happy Sound.mp3 */,
 				CE7ECAFC189F345B000AA33B /* Sorry Sound.wav */,
@@ -848,6 +851,7 @@
 				CE7ECAE0189D040A000AA33B /* D_2.png in Resources */,
 				CE7ECAF0189E2405000AA33B /* Dice.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
+				CE7ECB04189F7A0F000AA33B /* Dice Dropping.mp3 in Resources */,
 				CE7ECABF189C8EA3000AA33B /* Under-n-Over57x57.png in Resources */,
 				CE7ECAC5189C9C95000AA33B /* HomeScene.png in Resources */,
 				CE7ECAC0189C8EA3000AA33B /* Under-n-Over58x58.png in Resources */,

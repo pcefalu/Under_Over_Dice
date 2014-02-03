@@ -51,6 +51,7 @@ private:
   int             m_DiceHaveFallen   = 0;
   
   bool            m_bDisableRolls    = false;
+  bool            m_bSpeedUpPressed  = false;
   
   b2Vec2         *m_poGravity        = nullptr;
   b2World        *m_poWorld          = nullptr;
@@ -83,12 +84,17 @@ public:
   void menuSevenCallback(Object *pSender);
   void menuEvenCallback(Object *pSender);
   void menuRollCallback(Object *pSender);
-
+  void menuSpeedUpCallback(Object *pSender);
+  
   void PlayButtonClick();
   void PlayWinnerSound();
   void PlaySorrySound();
+  
   void PlayRollingSound();
   void StopRollingSound();
+  
+  void PlayFallingSound();
+  void StopFallingSound();
   
   void Tick(float dt);
   void UpdateStatusDisplay(eStatusTypes eType);

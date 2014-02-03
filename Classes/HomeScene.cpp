@@ -20,7 +20,7 @@ HomeScene::HomeScene()
 { // Declare Variables
   //--------------------------------------------------
   
-//  m_poMainScene = MainScene::createScene();
+
   
   //--------------------------------------------------
 } // End of Constructor Method
@@ -31,10 +31,7 @@ HomeScene::~HomeScene()
 { // Declare Variables
   //--------------------------------------------------
   
-//  this->unscheduleAllSelectors();
-//  this->getEventDispatcher()->removeAllEventListeners();
-//  
-//  m_poMainScene->release();
+
   
   //--------------------------------------------------
 } // End of Destructor Method
@@ -161,6 +158,18 @@ void HomeScene::menuPlayCallback(Object *pSender)
   
   //--------------------------------------------------
 } // End of menuPlayCallback Method
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

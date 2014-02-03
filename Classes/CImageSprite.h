@@ -53,3 +53,12 @@ public:
 
 
 #endif /* defined(__Under_n_Over__CImageSprite__) */
+
+
+
+
+
+
+
+
+

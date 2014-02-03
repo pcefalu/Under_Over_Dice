@@ -31,16 +31,12 @@ MainScene::~MainScene()
 { // Declare Variables
   //--------------------------------------------------
   
-//  if(m_poDice_1   != nullptr) delete m_poDice_1;
-//  if(m_poDice_2   != nullptr) delete m_poDice_2;
   if(m_poFloor    != nullptr) delete m_poFloor;
   if(m_poBoundry  != nullptr) delete m_poBoundry;
   if(m_poImage_1  != NULL)    delete m_poImage_1;
   if(m_poImage_2  != NULL)    delete m_poImage_2;
   if(m_poWorld    != NULL)    delete m_poWorld;
   
-//  m_poDice_1   = nullptr;
-//  m_poDice_2   = nullptr;
   m_poFloor    = nullptr;
   m_poBoundry  = nullptr;
   m_poImage_1  = nullptr;
@@ -230,6 +226,20 @@ bool MainScene::init()
   this->addChild(RollButton, 1);
   
   
+  // Create Speed Up Button
+  //--------------------------------------------------
+  auto SpeedUpItem = MenuItemImage::create("Button.png", "Button.png", CC_CALLBACK_1(MainScene::menuSpeedUpCallback, this));
+  SpeedUpItem->setScale(.75, .5);
+  
+  sngHorzSkew = visibleSize.width - 235 + SpeedUpItem->getContentSize().width/2;
+  sngVertSkew = SpeedUpItem->getContentSize().height/2;;
+	SpeedUpItem->setPosition(Point(origin.x + sngHorzSkew, origin.y + sngVertSkew));
+  
+  auto SpeedUpButton = Menu::create(SpeedUpItem, NULL);
+  SpeedUpButton->setPosition(Point::ZERO);
+  this->addChild(SpeedUpButton, 1);
+  
+  
   // Configure Background Music
   //--------------------------------------------------
   CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music Loop.mp3");
@@ -369,7 +379,7 @@ void MainScene::Tick(float dt)
         oItem->setRotation(-5 * CC_RADIANS_TO_DEGREES(oBody->GetAngle()));
         
         if(oItem->getPositionY() < - WORLD_TO_SCREEN(1) ||
-           oItem->getPositionX() < - WORLD_TO_SCREEN(1) ||
+           oItem->getPositionX() < - WORLD_TO_SCREEN(1) || m_bSpeedUpPressed ||
            oItem->getPositionX() > Director::getInstance()->getVisibleSize().width + WORLD_TO_SCREEN(1))
         {
           removeChild(oItem);
@@ -383,7 +393,8 @@ void MainScene::Tick(float dt)
     if(m_DiceHaveFallen >= 2)
     {
       ProcessStatusInformation();
-      m_bDisableRolls = false;
+      m_bDisableRolls    = false;
+      m_bSpeedUpPressed  = false;
     }
   }
   
@@ -532,6 +543,29 @@ void MainScene::StopRollingSound()
 
 
 //============================================================================
+void MainScene::PlayFallingSound()
+{ // Declare Variables
+  //--------------------------------------------------
+  
+  CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Dice Dropping.mp3");
+  CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(.1);
+  
+  //--------------------------------------------------
+} // End of PlayFallingSound Method
+
+
+//============================================================================
+void MainScene::StopFallingSound()
+{ // Declare Variables
+  //--------------------------------------------------
+  
+  CocosDenshion::SimpleAudioEngine::getInstance()->stopAllEffects();
+  
+  //--------------------------------------------------
+} // End of StopFallingSound Method
+
+
+//============================================================================
 void MainScene::menuExitCallback(Object *pSender)
 { // Declare Variables
   //--------------------------------------------------
@@ -599,6 +633,18 @@ void MainScene::menuEvenCallback(Object *pSender)
 
 
 //============================================================================
+void MainScene::menuSpeedUpCallback(Object *pSender)
+{ // Declare Variables
+  //--------------------------------------------------
+  
+  PlayButtonClick();
+  m_bSpeedUpPressed = true;
+  
+  //--------------------------------------------------
+} // End of menuSpeedUpCallback Method
+
+
+//============================================================================
 void MainScene::menuRollCallback(Object *pSender)
 { // Declare Variables
   //--------------------------------------------------
@@ -618,15 +664,11 @@ void MainScene::menuRollCallback(Object *pSender)
     sngHorzSkew      = visibleSize.width/2;
     sngVertSkew      = visibleSize.height/2;
     
-    Point *poPoint1  = new Point(origin.x - 50 + sngHorzSkew, origin.y + sngVertSkew + 15);
+    Point *poPoint1  = new Point(origin.x - 70 + sngHorzSkew, origin.y + sngVertSkew + 175);
     auto poDice_1    = (CDice *) new CDice(m_poWorld, m_poGravity, CDice::eShapeTypes::CIRCLE_SHAPE,
                                            poPoint1, CDice::eBodyTypes::DYNAMIC_BODY, .5, "Smile Dice.png");
     
     this->addChild(poDice_1->SpriteComponent(), 0);
-    
-    b2Body *poBody1  = poDice_1->Body();
-    b2Vec2 force1    = b2Vec2(-100, 100);
-    poBody1->ApplyLinearImpulse(force1, poBody1->GetPosition(), true);
     
     
     // Dice_2
@@ -634,22 +676,19 @@ void MainScene::menuRollCallback(Object *pSender)
     sngHorzSkew      = visibleSize.width/2;
     sngVertSkew      = visibleSize.height/2;
     
-    Point *poPoint2  = new Point(origin.x - 5 + sngHorzSkew, origin.y + sngVertSkew + 135);
+    Point *poPoint2  = new Point(origin.x - 25 + sngHorzSkew, origin.y + sngVertSkew + 295);
     auto poDice_2    = (CDice *) new CDice(m_poWorld, m_poGravity, CDice::eShapeTypes::CIRCLE_SHAPE,
                                            poPoint2, CDice::eBodyTypes::DYNAMIC_BODY, .5, "Sad Dice.png");
     
     this->addChild(poDice_2->SpriteComponent(), 0);
-    
-    b2Body *poBody2  = poDice_2->Body();
-    b2Vec2 force2    = b2Vec2(-100, 100);
-    poBody2->ApplyLinearImpulse(force2, poBody2->GetPosition(), true);
     
     m_NumberOfDice    = 0;
     m_DiceHaveFallen  = 0;
     m_bDisableRolls   = true;
     
     UpdateStatusDisplay(Inactive);
-    PlayRollingSound();
+    PlayFallingSound();
+    //PlayRollingSound();
     PlayButtonClick();
   }
   
