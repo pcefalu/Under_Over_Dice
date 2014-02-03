@@ -70,7 +70,6 @@
 		CE477E6E189A590F00E6FE6F /* Seven Button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE477E68189A590F00E6FE6F /* Seven Button.png */; };
 		CE477E77189B4E1900E6FE6F /* Button Press.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CE477E76189B4E1900E6FE6F /* Button Press.mp3 */; };
 		CE477E79189B531500E6FE6F /* Music Loop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CE477E78189B531500E6FE6F /* Music Loop.mp3 */; };
-		CE477E7B189B98AE00E6FE6F /* Dice Button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE477E7A189B98AE00E6FE6F /* Dice Button.png */; };
 		CE477E7E189C125400E6FE6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE477E7D189C125400E6FE6F /* UIKit.framework */; };
 		CE7ECAA6189C1770000AA33B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7ECAA5189C1770000AA33B /* OpenGLES.framework */; };
 		CE7ECAA7189C1B4C000AA33B /* libjsbindings iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB11180E9839004C840B /* libjsbindings iOS.a */; };
@@ -88,6 +87,24 @@
 		CE7ECAD4189CA918000AA33B /* Default-568h@2x_ng.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECACF189CA918000AA33B /* Default-568h@2x_ng.png */; };
 		CE7ECAD5189CA918000AA33B /* Retina 4-inch(iOS 6.1 and Prior)640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECAD0189CA918000AA33B /* Retina 4-inch(iOS 6.1 and Prior)640x1136.png */; };
 		CE7ECAD7189CAAB7000AA33B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECAD6189CAAB7000AA33B /* Images.xcassets */; };
+		CE7ECADF189D040A000AA33B /* D_1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECAD9189D040A000AA33B /* D_1.png */; };
+		CE7ECAE0189D040A000AA33B /* D_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECADA189D040A000AA33B /* D_2.png */; };
+		CE7ECAE1189D040A000AA33B /* D_3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECADB189D040A000AA33B /* D_3.png */; };
+		CE7ECAE2189D040A000AA33B /* D_4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECADC189D040A000AA33B /* D_4.png */; };
+		CE7ECAE3189D040A000AA33B /* D_5.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECADD189D040A000AA33B /* D_5.png */; };
+		CE7ECAE4189D040A000AA33B /* D_6.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECADE189D040A000AA33B /* D_6.png */; };
+		CE7ECAE7189D0800000AA33B /* Sad Dice.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECAE5189D0800000AA33B /* Sad Dice.png */; };
+		CE7ECAE8189D0800000AA33B /* Smile Dice.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECAE6189D0800000AA33B /* Smile Dice.png */; };
+		CE7ECAEB189DA1D3000AA33B /* CPhysicsBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE7ECAE9189DA1D3000AA33B /* CPhysicsBody.cpp */; };
+		CE7ECAEE189DC240000AA33B /* CDice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE7ECAEC189DC240000AA33B /* CDice.cpp */; };
+		CE7ECAF0189E2405000AA33B /* Dice.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECAEF189E2405000AA33B /* Dice.png */; };
+		CE7ECAF2189E2A56000AA33B /* Floor.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECAF1189E2A56000AA33B /* Floor.png */; };
+		CE7ECAF5189E2F53000AA33B /* CFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE7ECAF3189E2F53000AA33B /* CFloor.cpp */; };
+		CE7ECAF7189ED143000AA33B /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECAF6189ED143000AA33B /* Button.png */; };
+		CE7ECAFA189F0ADD000AA33B /* CImageSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE7ECAF8189F0ADD000AA33B /* CImageSprite.cpp */; };
+		CE7ECAFD189F345B000AA33B /* Happy Sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECAFB189F345B000AA33B /* Happy Sound.mp3 */; };
+		CE7ECAFE189F345B000AA33B /* Sorry Sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECAFC189F345B000AA33B /* Sorry Sound.wav */; };
+		CE7ECB02189F3DD6000AA33B /* Dice Rolling.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE7ECB01189F3DD6000AA33B /* Dice Rolling.wav */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -321,7 +338,6 @@
 		CE477E75189AF6BD00E6FE6F /* MscConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MscConstants.h; path = ../Classes/MscConstants.h; sourceTree = "<group>"; };
 		CE477E76189B4E1900E6FE6F /* Button Press.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Button Press.mp3"; path = "../Sounds/Button Press.mp3"; sourceTree = "<group>"; };
 		CE477E78189B531500E6FE6F /* Music Loop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Music Loop.mp3"; path = "../Sounds/Music Loop.mp3"; sourceTree = "<group>"; };
-		CE477E7A189B98AE00E6FE6F /* Dice Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Dice Button.png"; path = "../Buttons/Dice Button.png"; sourceTree = "<group>"; };
 		CE477E7D189C125400E6FE6F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		CE7ECAA5189C1770000AA33B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
 		CE7ECAB3189C8EA3000AA33B /* Under-n-Over29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Under-n-Over29x29.png"; path = "../Graphics/Under-n-Over29x29.png"; sourceTree = "<group>"; };
@@ -337,6 +353,28 @@
 		CE7ECACF189CA918000AA33B /* Default-568h@2x_ng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x_ng.png"; path = "../Graphics/Default-568h@2x_ng.png"; sourceTree = "<group>"; };
 		CE7ECAD0189CA918000AA33B /* Retina 4-inch(iOS 6.1 and Prior)640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Retina 4-inch(iOS 6.1 and Prior)640x1136.png"; path = "../Graphics/Retina 4-inch(iOS 6.1 and Prior)640x1136.png"; sourceTree = "<group>"; };
 		CE7ECAD6189CAAB7000AA33B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Under-n-Over iOS/Images.xcassets"; sourceTree = SOURCE_ROOT; };
+		CE7ECAD9189D040A000AA33B /* D_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = D_1.png; path = ../Graphics/Dice/D_1.png; sourceTree = "<group>"; };
+		CE7ECADA189D040A000AA33B /* D_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = D_2.png; path = ../Graphics/Dice/D_2.png; sourceTree = "<group>"; };
+		CE7ECADB189D040A000AA33B /* D_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = D_3.png; path = ../Graphics/Dice/D_3.png; sourceTree = "<group>"; };
+		CE7ECADC189D040A000AA33B /* D_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = D_4.png; path = ../Graphics/Dice/D_4.png; sourceTree = "<group>"; };
+		CE7ECADD189D040A000AA33B /* D_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = D_5.png; path = ../Graphics/Dice/D_5.png; sourceTree = "<group>"; };
+		CE7ECADE189D040A000AA33B /* D_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = D_6.png; path = ../Graphics/Dice/D_6.png; sourceTree = "<group>"; };
+		CE7ECAE5189D0800000AA33B /* Sad Dice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Sad Dice.png"; path = "../Graphics/Dice/Sad Dice.png"; sourceTree = "<group>"; };
+		CE7ECAE6189D0800000AA33B /* Smile Dice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Smile Dice.png"; path = "../Graphics/Dice/Smile Dice.png"; sourceTree = "<group>"; };
+		CE7ECAE9189DA1D3000AA33B /* CPhysicsBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPhysicsBody.cpp; path = ../Classes/CPhysicsBody.cpp; sourceTree = "<group>"; };
+		CE7ECAEA189DA1D3000AA33B /* CPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPhysicsBody.h; path = ../Classes/CPhysicsBody.h; sourceTree = "<group>"; };
+		CE7ECAEC189DC240000AA33B /* CDice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDice.cpp; path = ../Classes/CDice.cpp; sourceTree = "<group>"; };
+		CE7ECAED189DC240000AA33B /* CDice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDice.h; path = ../Classes/CDice.h; sourceTree = "<group>"; };
+		CE7ECAEF189E2405000AA33B /* Dice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Dice.png; path = ../Graphics/Dice/Dice.png; sourceTree = "<group>"; };
+		CE7ECAF1189E2A56000AA33B /* Floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Floor.png; path = ../Buttons/Floor.png; sourceTree = "<group>"; };
+		CE7ECAF3189E2F53000AA33B /* CFloor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFloor.cpp; path = ../Classes/CFloor.cpp; sourceTree = "<group>"; };
+		CE7ECAF4189E2F53000AA33B /* CFloor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFloor.h; path = ../Classes/CFloor.h; sourceTree = "<group>"; };
+		CE7ECAF6189ED143000AA33B /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Button.png; path = ../Buttons/Button.png; sourceTree = "<group>"; };
+		CE7ECAF8189F0ADD000AA33B /* CImageSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CImageSprite.cpp; path = ../Classes/CImageSprite.cpp; sourceTree = "<group>"; };
+		CE7ECAF9189F0ADD000AA33B /* CImageSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CImageSprite.h; path = ../Classes/CImageSprite.h; sourceTree = "<group>"; };
+		CE7ECAFB189F345B000AA33B /* Happy Sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Happy Sound.mp3"; path = "../Sounds/Happy Sound.mp3"; sourceTree = "<group>"; };
+		CE7ECAFC189F345B000AA33B /* Sorry Sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Sorry Sound.wav"; path = "../Sounds/Sorry Sound.wav"; sourceTree = "<group>"; };
+		CE7ECB01189F3DD6000AA33B /* Dice Rolling.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Dice Rolling.wav"; path = "../Sounds/Dice Rolling.wav"; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -419,6 +457,14 @@
 				1AFAF8B616D35DE700DB1158 /* MainScene.h */,
 				CE477E5F189A4A8000E6FE6F /* HomeScene.cpp */,
 				CE477E60189A4A8000E6FE6F /* HomeScene.h */,
+				CE7ECAE9189DA1D3000AA33B /* CPhysicsBody.cpp */,
+				CE7ECAEA189DA1D3000AA33B /* CPhysicsBody.h */,
+				CE7ECAEC189DC240000AA33B /* CDice.cpp */,
+				CE7ECAED189DC240000AA33B /* CDice.h */,
+				CE7ECAF3189E2F53000AA33B /* CFloor.cpp */,
+				CE7ECAF4189E2F53000AA33B /* CFloor.h */,
+				CE7ECAF8189F0ADD000AA33B /* CImageSprite.cpp */,
+				CE7ECAF9189F0ADD000AA33B /* CImageSprite.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -537,10 +583,15 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE7ECAD8189D039F000AA33B /* Dice */,
 				CE7ECAD6189CAAB7000AA33B /* Images.xcassets */,
 				CE7ECAAD189C8E65000AA33B /* Graphics */,
+				CE7ECB01189F3DD6000AA33B /* Dice Rolling.wav */,
+				CE7ECAF1189E2A56000AA33B /* Floor.png */,
+				CE7ECAFB189F345B000AA33B /* Happy Sound.mp3 */,
+				CE7ECAFC189F345B000AA33B /* Sorry Sound.wav */,
+				CE7ECAF6189ED143000AA33B /* Button.png */,
 				CE7ECAC4189C9C95000AA33B /* HomeScene.png */,
-				CE477E7A189B98AE00E6FE6F /* Dice Button.png */,
 				CE477E78189B531500E6FE6F /* Music Loop.mp3 */,
 				CE477E76189B4E1900E6FE6F /* Button Press.mp3 */,
 				CE477E63189A590F00E6FE6F /* Even Button.png */,
@@ -572,6 +623,22 @@
 				CE7ECAB8189C8EA3000AA33B /* Under-n-Over120x120.png */,
 			);
 			name = Graphics;
+			sourceTree = "<group>";
+		};
+		CE7ECAD8189D039F000AA33B /* Dice */ = {
+			isa = PBXGroup;
+			children = (
+				CE7ECAEF189E2405000AA33B /* Dice.png */,
+				CE7ECAE5189D0800000AA33B /* Sad Dice.png */,
+				CE7ECAE6189D0800000AA33B /* Smile Dice.png */,
+				CE7ECAD9189D040A000AA33B /* D_1.png */,
+				CE7ECADA189D040A000AA33B /* D_2.png */,
+				CE7ECADB189D040A000AA33B /* D_3.png */,
+				CE7ECADC189D040A000AA33B /* D_4.png */,
+				CE7ECADD189D040A000AA33B /* D_5.png */,
+				CE7ECADE189D040A000AA33B /* D_6.png */,
+			);
+			name = Dice;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -766,6 +833,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7ECAE8189D0800000AA33B /* Smile Dice.png in Resources */,
+				CE7ECAE1189D040A000AA33B /* D_3.png in Resources */,
 				CE7ECAD2189CA918000AA33B /* Retina (iOS 6.1 and Prior)640x960.png in Resources */,
 				CE7ECAD7189CAAB7000AA33B /* Images.xcassets in Resources */,
 				CE7ECAC1189C8EA3000AA33B /* Under-n-Over80x80.png in Resources */,
@@ -774,7 +843,10 @@
 				CE7ECAC2189C8EA3000AA33B /* Under-n-Over114x114.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
+				CE7ECAE2189D040A000AA33B /* D_4.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
+				CE7ECAE0189D040A000AA33B /* D_2.png in Resources */,
+				CE7ECAF0189E2405000AA33B /* Dice.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				CE7ECABF189C8EA3000AA33B /* Under-n-Over57x57.png in Resources */,
 				CE7ECAC5189C9C95000AA33B /* HomeScene.png in Resources */,
@@ -784,8 +856,10 @@
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
-				CE477E7B189B98AE00E6FE6F /* Dice Button.png in Resources */,
+				CE7ECAE3189D040A000AA33B /* D_5.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
+				CE7ECAFD189F345B000AA33B /* Happy Sound.mp3 in Resources */,
+				CE7ECAF7189ED143000AA33B /* Button.png in Resources */,
 				CE477E6A189A590F00E6FE6F /* Exit Button.png in Resources */,
 				CE7ECAD3189CA918000AA33B /* Default~iphone_ng.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
@@ -793,10 +867,15 @@
 				CE477E69189A590F00E6FE6F /* Even Button.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
+				CE7ECAE4189D040A000AA33B /* D_6.png in Resources */,
+				CE7ECAFE189F345B000AA33B /* Sorry Sound.wav in Resources */,
 				CE477E6B189A590F00E6FE6F /* Odd Button.png in Resources */,
+				CE7ECB02189F3DD6000AA33B /* Dice Rolling.wav in Resources */,
 				CE7ECABE189C8EA3000AA33B /* Under-n-Over29x29.png in Resources */,
 				CE7ECAC3189C8EA3000AA33B /* Under-n-Over120x120.png in Resources */,
+				CE7ECAE7189D0800000AA33B /* Sad Dice.png in Resources */,
 				CE7ECAD4189CA918000AA33B /* Default-568h@2x_ng.png in Resources */,
+				CE7ECADF189D040A000AA33B /* D_1.png in Resources */,
 				CE7ECAD5189CA918000AA33B /* Retina 4-inch(iOS 6.1 and Prior)640x1136.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				CE477E77189B4E1900E6FE6F /* Button Press.mp3 in Resources */,
@@ -804,6 +883,7 @@
 				CE7ECAD1189CA918000AA33B /* Default_ng.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				CE7ECAF2189E2A56000AA33B /* Floor.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				CE477E6D189A590F00E6FE6F /* Roll Button.png in Resources */,
 			);
@@ -828,9 +908,13 @@
 			files = (
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				CE477E61189A4A8000E6FE6F /* HomeScene.cpp in Sources */,
+				CE7ECAEE189DC240000AA33B /* CDice.cpp in Sources */,
+				CE7ECAF5189E2F53000AA33B /* CFloor.cpp in Sources */,
+				CE7ECAFA189F0ADD000AA33B /* CImageSprite.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				CE7ECAEB189DA1D3000AA33B /* CPhysicsBody.cpp in Sources */,
 				1AFAF8B816D35DE700DB1158 /* MainScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,13 +8,11 @@
 #include <iostream>
 
 #include "MscConstants.h"
-#include "SimpleAudioEngine.h"
-#include "Box2D/Box2D.h"
 #include "MainScene.h"
 
 
-b2World  *poWorld;
-b2Vec2    oGravity;
+//b2World  *poWorld;
+//b2Vec2    oGravity;
 
 
 //============================================================================
@@ -22,7 +20,7 @@ MainScene::MainScene()
 { // Declare Variables
   //--------------------------------------------------
   
-  
+
   
   //--------------------------------------------------
 } // End of Constructor Method
@@ -33,11 +31,21 @@ MainScene::~MainScene()
 { // Declare Variables
   //--------------------------------------------------
   
-//  this->unscheduleAllSelectors();
-//  this->getEventDispatcher()->removeAllEventListeners();
-//  
-  if(poWorld != NULL) delete poWorld;
-  poWorld  = nullptr;
+//  if(m_poDice_1   != nullptr) delete m_poDice_1;
+//  if(m_poDice_2   != nullptr) delete m_poDice_2;
+  if(m_poFloor    != nullptr) delete m_poFloor;
+  if(m_poBoundry  != nullptr) delete m_poBoundry;
+  if(m_poImage_1  != NULL)    delete m_poImage_1;
+  if(m_poImage_2  != NULL)    delete m_poImage_2;
+  if(m_poWorld    != NULL)    delete m_poWorld;
+  
+//  m_poDice_1   = nullptr;
+//  m_poDice_2   = nullptr;
+  m_poFloor    = nullptr;
+  m_poBoundry  = nullptr;
+  m_poImage_1  = nullptr;
+  m_poImage_2  = nullptr;
+  m_poWorld    = nullptr;
 
   //--------------------------------------------------
 } // End of Destructor Method
@@ -56,8 +64,80 @@ bool MainScene::init()
     return false;
   }
   
-  Size visibleSize = Director::getInstance()->getVisibleSize();
-  Point origin = Director::getInstance()->getVisibleOrigin();
+  Size visibleSize  = Director::getInstance()->getVisibleSize();
+  Point origin      = Director::getInstance()->getVisibleOrigin();
+  
+  
+  // Create Physics World
+  //--------------------------------------------------
+  m_poGravity    = new b2Vec2(0.0f, -WORLD_TO_SCREEN(GRAVITY_RATIO));
+  bool bDoSleep  = true;
+  
+  m_poWorld = new b2World(*m_poGravity);
+  m_poWorld->SetAllowSleeping(bDoSleep);
+  
+  
+  // Create Static Body Floor
+  //--------------------------------------------------
+  Point *poPoint  = new Point(origin.x + 575, origin.y + 150);
+  m_poFloor       = new CFloor(m_poWorld, m_poGravity, CFloor::eShapeTypes::EDGE_SHAPE,
+                               poPoint, CFloor::eBodyTypes::STATIC_BODY, .35, "Floor.png");
+  
+  this->addChild(m_poFloor->SpriteComponent(), 0);
+
+  
+  // Create Static Body Boundry
+  //--------------------------------------------------
+  sngHorzSkew                = visibleSize.width/2;
+  sngVertSkew                = visibleSize.height/2;
+
+  auto *poBoundry            = Sprite::create("Button.png");
+  poBoundry->setPosition(Point(origin.x + sngHorzSkew, origin.y + 150));
+  poBoundry->setScale(.05);
+  
+  b2BodyDef oBoundryBodyDef;
+  oBoundryBodyDef.type      = b2_staticBody;
+  oBoundryBodyDef.position  = b2Vec2(origin.x + sngHorzSkew, origin.y + 150);
+  oBoundryBodyDef.userData  = poBoundry;
+  
+  b2Body *poBoundryBody     = m_poWorld->CreateBody(&oBoundryBodyDef);
+  
+  b2EdgeShape  oBoundryEdge;
+  oBoundryEdge.Set(b2Vec2(origin.x - 275, origin.y + 25), b2Vec2(sngHorzSkew - 300, origin.y + 25));
+  
+  b2FixtureDef oBoundryFixture;
+  oBoundryFixture.density      = DEFAULT_FIXTURE_DENSITY;
+  oBoundryFixture.friction     = DEFAULT_FIXTURE_FICTION;
+  oBoundryFixture.restitution  = DEFAULT_FIXTURE_RESTITUTION;
+  oBoundryFixture.shape        = &oBoundryEdge;
+  
+  poBoundryBody->CreateFixture(&oBoundryFixture);
+  
+  this->addChild(poBoundry, 0);
+
+  
+  // Create Image Objects
+  //--------------------------------------------------
+  auto poGravity  = (b2Vec2 *) new b2Vec2(0.0f, -WORLD_TO_SCREEN(GRAVITY_RATIO));
+  bool bSleep     = true;
+  
+  auto poWorld    = (b2World *) new b2World(*poGravity);
+  poWorld->SetAllowSleeping(bSleep);
+  
+  sngHorzSkew                = visibleSize.width/2;
+  sngVertSkew                = visibleSize.height/2;
+  
+  Point *poImgPoint1  = new Point(origin.x + sngHorzSkew - 55, origin.y + 200);
+  m_poImage_1         = new CImageSprite(poWorld, poGravity, CImageSprite::eShapeTypes::CIRCLE_SHAPE,
+                                         poImgPoint1, CImageSprite::eBodyTypes::STATIC_BODY, .5, "D_3.png");
+  
+  this->addChild(m_poImage_1->SpriteComponent(), 0);
+  
+  Point *poImgPoint2  = new Point(origin.x + sngHorzSkew + 55, origin.y + 200);
+  m_poImage_2         = new CImageSprite(poWorld, poGravity, CImageSprite::eShapeTypes::CIRCLE_SHAPE,
+                                         poImgPoint2, CImageSprite::eBodyTypes::STATIC_BODY, .5, "D_4.png");
+  
+  this->addChild(m_poImage_2->SpriteComponent(), 0);
   
   
   // Create Status Label
@@ -150,29 +230,15 @@ bool MainScene::init()
   this->addChild(RollButton, 1);
   
   
-  // Create Dice Sprite
+  // Configure Background Music
   //--------------------------------------------------
-//  auto sprite = Sprite::create("HomeScene.png");
-//
-//  // position the sprite on the center of the screen
-//  sprite->setPosition(Point(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-//
-//  // add the sprite as a child to this layer
-//  this->addChild(sprite, 0);
-  
   CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music Loop.mp3");
   CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Music Loop.mp3", true);
-  CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(.05);
+  CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(.03);
   
   
   // Create and Configure Physics
   //--------------------------------------------------
-  oGravity.Set(0.0f, -WORLD_TO_SCREEN(9.8));
-  bool bDoSleep = true;
-  
-  poWorld = new b2World(oGravity);
-  poWorld->SetAllowSleeping(bDoSleep);
-  
   auto poTouchListener           = EventListenerTouchOneByOne::create();
   poTouchListener->onTouchBegan  = CC_CALLBACK_2(MainScene::TouchBegan, this);
   getEventDispatcher()->addEventListenerWithFixedPriority(poTouchListener, 100);
@@ -267,34 +333,17 @@ std::string MainScene::RtnStatusTextString(eStatusTypes eType)
 
 
 //============================================================================
-void MainScene::CreateDice(Point oPoint)
+void MainScene::UpdateStatusDisplay(eStatusTypes eType)
 { // Declare Variables
   //--------------------------------------------------
   
-  auto DiceSprite = Sprite::create("Dice Button.png");
-  DiceSprite->setPosition(oPoint);
-  this->addChild(DiceSprite, 0);
+  LabelTTF *poStatusLabel  = (LabelTTF *)this->getChildByTag(m_StatusTagID);
+  m_eStatusType            = eType;
   
-  b2BodyDef oDiceBodyDef;
-  oDiceBodyDef.type      = b2_dynamicBody;
-  oDiceBodyDef.position  = b2Vec2(DiceSprite->getPositionX(), DiceSprite->getPositionY());
-  oDiceBodyDef.userData  = DiceSprite;
-  
-  auto DiceBody          = poWorld->CreateBody(&oDiceBodyDef);
-  
-  b2CircleShape oCircle;
-  oCircle.m_radius       = WORLD_TO_SCREEN(0.6);
-  
-  b2FixtureDef oDiceFixtureDef;
-  oDiceFixtureDef.shape        = &oCircle;
-  oDiceFixtureDef.density      = 1.0f;
-  oDiceFixtureDef.friction     = 0.6f;
-  oDiceFixtureDef.restitution  = 0.8f;
-  
-  DiceBody->CreateFixture(&oDiceFixtureDef);
+  poStatusLabel->setString(RtnStatusTextString(m_eStatusType));
   
   //--------------------------------------------------
-} // End of CreateDice Method
+} // End of UpdateStatusDisplay Method
 
 
 //============================================================================
@@ -302,26 +351,39 @@ void MainScene::Tick(float dt)
 { // Declare Variables
   //--------------------------------------------------
   
-  int intVelocityIterations = 8;
-  int intPositionIterations = 3;
-  
-  poWorld->Step(dt, intVelocityIterations, intPositionIterations);
-  
-  for(auto oBody = poWorld->GetBodyList(); oBody; oBody = oBody->GetNext())
+  if(m_bDisableRolls)
   {
-    if(oBody->GetUserData() != NULL)
+    m_poWorld->Step(dt, DEFAULT_VELOCITY_ITERATIONS, DEFAULT_POSITION_ITERATIONS);
+    
+    for(auto oBody = m_poWorld->GetBodyList(); oBody; oBody = oBody->GetNext())
     {
-      auto oItem = (Sprite *) oBody->GetUserData();
-      oItem->setPosition(Point(oBody->GetPosition().x, oBody->GetPosition().y));
-      oItem->setRotation(-1 * CC_RADIANS_TO_DEGREES(oBody->GetAngle()));
-      
-      if(oItem->getPositionY() < - WORLD_TO_SCREEN(1) ||
-         oItem->getPositionX() < - WORLD_TO_SCREEN(1) ||
-         oItem->getPositionX() > Director::getInstance()->getVisibleSize().width + WORLD_TO_SCREEN(1))
-      {
-        removeChild(oItem);
-        poWorld->DestroyBody(oBody);
+      if(oBody->GetUserData() != NULL)
+      { // Perform Processing Operation
+        //----------------------------------------------
+        auto oItem = (Sprite *) oBody->GetUserData();
+        
+        float   sngLocX    = oBody->GetPosition().x;
+        float   sngLocY    = oBody->GetPosition().y;
+        
+        oItem->setPosition(Point(sngLocX, sngLocY));
+        oItem->setRotation(-5 * CC_RADIANS_TO_DEGREES(oBody->GetAngle()));
+        
+        if(oItem->getPositionY() < - WORLD_TO_SCREEN(1) ||
+           oItem->getPositionX() < - WORLD_TO_SCREEN(1) ||
+           oItem->getPositionX() > Director::getInstance()->getVisibleSize().width + WORLD_TO_SCREEN(1))
+        {
+          removeChild(oItem);
+          m_poWorld->DestroyBody(oBody);
+          m_DiceHaveFallen++;
+
+        }
       }
+    }
+
+    if(m_DiceHaveFallen >= 2)
+    {
+      ProcessStatusInformation();
+      m_bDisableRolls = false;
     }
   }
   
@@ -330,11 +392,79 @@ void MainScene::Tick(float dt)
 
 
 //============================================================================
-bool MainScene::TouchBegan(Touch *poTouch, Event *poEvent)
+void MainScene::ProcessStatusInformation()
 { // Declare Variables
   //--------------------------------------------------
   
-//  CreateDice(poTouch->getLocation());
+  StopRollingSound();
+  
+  int intLookupID_1 = arc4random_uniform(m_MaxLimitDice);
+  if(intLookupID_1 == 0) intLookupID_1 = 1;
+  
+  int intLookupID_2 = arc4random_uniform(m_MaxLimitDice);
+  if(intLookupID_2 == 0) intLookupID_2 = 1;
+
+  m_poImage_1->SetImage((CImageSprite::eImageIDs) intLookupID_1);
+  m_poImage_2->SetImage((CImageSprite::eImageIDs) intLookupID_2);
+  
+  int intResult = intLookupID_1 + intLookupID_2;
+  
+  if(m_eBidType == OddBid)
+  { // Process Status for ODD Bid
+    //--------------------------------------------------
+    if(intResult == 3 || intResult == 5 || intResult == 9 || intResult == 11)
+    {
+      UpdateStatusDisplay(Winner);
+      PlayWinnerSound();
+    }
+    else
+    {
+      UpdateStatusDisplay(Loser);
+      PlaySorrySound();
+    }
+  }
+  
+  if(m_eBidType == EvenBid)
+  { // Process Status for EVEN Bid
+    //--------------------------------------------------
+    if(intResult == 2 || intResult == 4 || intResult == 6 || intResult == 8 || intResult == 10 || intResult == 12)
+    {
+      UpdateStatusDisplay(Winner);
+      PlayWinnerSound();
+    }
+    else
+    {
+      UpdateStatusDisplay(Loser);
+      PlaySorrySound();
+    }
+  }
+  
+  if(m_eBidType == SevenBid)
+  { // Process Status for SEVEN Bid
+    //--------------------------------------------------
+    if(intResult == 7)
+    {
+      UpdateStatusDisplay(Winner);
+      PlayWinnerSound();
+    }
+    else
+    {
+      UpdateStatusDisplay(Loser);
+      PlaySorrySound();
+    }
+  }
+  
+  m_poImage_1->Visible(true);
+  m_poImage_2->Visible(true);
+  
+  //--------------------------------------------------
+} // End of ProcessStatusInformation Method
+
+
+//============================================================================
+bool MainScene::TouchBegan(Touch *poTouch, Event *poEvent)
+{ // Declare Variables
+  //--------------------------------------------------
   
   return true;
   
@@ -355,6 +485,53 @@ void MainScene::PlayButtonClick()
 
 
 //============================================================================
+void MainScene::PlayWinnerSound()
+{ // Declare Variables
+  //--------------------------------------------------
+  
+  CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Happy Sound.mp3");
+  CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(.5);
+  
+  //--------------------------------------------------
+} // End of PlayWinnerSound Method
+
+
+//============================================================================
+void MainScene::PlaySorrySound()
+{ // Declare Variables
+  //--------------------------------------------------
+  
+  CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sorry Sound.wav");
+  CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(.8);
+  
+  //--------------------------------------------------
+} // End of PlaySorrySound Method
+
+
+//============================================================================
+void MainScene::PlayRollingSound()
+{ // Declare Variables
+  //--------------------------------------------------
+  
+  CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Dice Rolling.wav");
+  CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(1);
+  
+  //--------------------------------------------------
+} // End of PlayRollingSound Method
+
+
+//============================================================================
+void MainScene::StopRollingSound()
+{ // Declare Variables
+  //--------------------------------------------------
+  
+  CocosDenshion::SimpleAudioEngine::getInstance()->stopAllEffects();
+  
+  //--------------------------------------------------
+} // End of StopRollingSound Method
+
+
+//============================================================================
 void MainScene::menuExitCallback(Object *pSender)
 { // Declare Variables
   //--------------------------------------------------
@@ -372,11 +549,14 @@ void MainScene::menuSevenCallback(Object *pSender)
 { // Declare Variables
   //--------------------------------------------------
   
-  PlayButtonClick();
-  LabelTTF *poBidLabel = (LabelTTF *)this->getChildByTag(m_BidTagID);
+  if(!m_bDisableRolls)
+  {
+    PlayButtonClick();
+    LabelTTF *poBidLabel = (LabelTTF *)this->getChildByTag(m_BidTagID);
 
-  m_eBidType = SevenBid;
-  poBidLabel->setString(RtnBidTextString(SevenBid));
+    m_eBidType = SevenBid;
+    poBidLabel->setString(RtnBidTextString(SevenBid));
+  }
   
   //--------------------------------------------------
 } // End of menuSevenCallback Method
@@ -387,11 +567,14 @@ void MainScene::menuOddCallback(Object *pSender)
 { // Declare Variables
   //--------------------------------------------------
   
-  PlayButtonClick();
-  LabelTTF *poBidLabel = (LabelTTF *)this->getChildByTag(m_BidTagID);
-  
-  m_eBidType = OddBid;
-  poBidLabel->setString(RtnBidTextString(OddBid));
+  if(!m_bDisableRolls)
+  {
+    PlayButtonClick();
+    LabelTTF *poBidLabel = (LabelTTF *)this->getChildByTag(m_BidTagID);
+    
+    m_eBidType = OddBid;
+    poBidLabel->setString(RtnBidTextString(OddBid));
+  }
   
   //--------------------------------------------------
 } // End of menuOddCallback Method
@@ -402,11 +585,14 @@ void MainScene::menuEvenCallback(Object *pSender)
 { // Declare Variables
   //--------------------------------------------------
   
-  PlayButtonClick();
-  LabelTTF *poBidLabel = (LabelTTF *)this->getChildByTag(m_BidTagID);
-  
-  m_eBidType = EvenBid;
-  poBidLabel->setString(RtnBidTextString(EvenBid));
+  if(!m_bDisableRolls)
+  {
+    PlayButtonClick();
+    LabelTTF *poBidLabel = (LabelTTF *)this->getChildByTag(m_BidTagID);
+    
+    m_eBidType = EvenBid;
+    poBidLabel->setString(RtnBidTextString(EvenBid));
+  }
   
   //--------------------------------------------------
 } // End of menuEvenCallback Method
@@ -417,22 +603,55 @@ void MainScene::menuRollCallback(Object *pSender)
 { // Declare Variables
   //--------------------------------------------------
   
-  PlayButtonClick();
-  LabelTTF *poStatusLabel = (LabelTTF *)this->getChildByTag(m_StatusTagID);
-  
-  if(m_eStatusType == Winner)
-  {
-    m_eStatusType = Loser;
-    poStatusLabel->setString(RtnStatusTextString(m_eStatusType));
+  if(!m_bDisableRolls)
+  { // Dice_1
+    //------------------------------------------------
+    m_poImage_1->Visible(false);
+    m_poImage_2->Visible(false);
+    
+    float sngHorzSkew = 0;
+    float sngVertSkew = 0;
+    
+    Size visibleSize  = Director::getInstance()->getVisibleSize();
+    Point origin      = Director::getInstance()->getVisibleOrigin();
+    
+    sngHorzSkew      = visibleSize.width/2;
+    sngVertSkew      = visibleSize.height/2;
+    
+    Point *poPoint1  = new Point(origin.x - 50 + sngHorzSkew, origin.y + sngVertSkew + 15);
+    auto poDice_1    = (CDice *) new CDice(m_poWorld, m_poGravity, CDice::eShapeTypes::CIRCLE_SHAPE,
+                                           poPoint1, CDice::eBodyTypes::DYNAMIC_BODY, .5, "Smile Dice.png");
+    
+    this->addChild(poDice_1->SpriteComponent(), 0);
+    
+    b2Body *poBody1  = poDice_1->Body();
+    b2Vec2 force1    = b2Vec2(-100, 100);
+    poBody1->ApplyLinearImpulse(force1, poBody1->GetPosition(), true);
+    
+    
+    // Dice_2
+    //------------------------------------------------
+    sngHorzSkew      = visibleSize.width/2;
+    sngVertSkew      = visibleSize.height/2;
+    
+    Point *poPoint2  = new Point(origin.x - 5 + sngHorzSkew, origin.y + sngVertSkew + 135);
+    auto poDice_2    = (CDice *) new CDice(m_poWorld, m_poGravity, CDice::eShapeTypes::CIRCLE_SHAPE,
+                                           poPoint2, CDice::eBodyTypes::DYNAMIC_BODY, .5, "Sad Dice.png");
+    
+    this->addChild(poDice_2->SpriteComponent(), 0);
+    
+    b2Body *poBody2  = poDice_2->Body();
+    b2Vec2 force2    = b2Vec2(-100, 100);
+    poBody2->ApplyLinearImpulse(force2, poBody2->GetPosition(), true);
+    
+    m_NumberOfDice    = 0;
+    m_DiceHaveFallen  = 0;
+    m_bDisableRolls   = true;
+    
+    UpdateStatusDisplay(Inactive);
+    PlayRollingSound();
+    PlayButtonClick();
   }
-  else
-  {
-    m_eStatusType = Winner;
-    poStatusLabel->setString(RtnStatusTextString(m_eStatusType));
-  }
-
-  Point *poPoint = new Point(poStatusLabel->getPositionX(), poStatusLabel->getPositionY());
-  CreateDice(*poPoint);
   
   //--------------------------------------------------
 } // End of menuRollCallback Method

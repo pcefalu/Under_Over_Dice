@@ -9,7 +9,13 @@
 #ifndef __MAIN_SCENE_H__
 #define __MAIN_SCENE_H__
 
+#include "SimpleAudioEngine.h"
+#include "Box2D/Box2D.h"
 #include "cocos2d.h"
+#include "CImageSprite.h"
+#include "CFloor.h"
+#include "CDice.h"
+
 
 using namespace cocos2d;
 
@@ -30,21 +36,41 @@ private:
   { // Status Types
     //--------------
     Inactive, Winner, Loser
+    
   };
   
   
-  eBidTypes       m_eBidType     = NoBid;
-  eStatusTypes    m_eStatusType  = Inactive;
+  eBidTypes       m_eBidType         = NoBid;
+  eStatusTypes    m_eStatusType      = Inactive;
   
-  const int       m_BidTagID     = 1;
-  const int       m_StatusTagID  = 2;
+  const int       m_BidTagID         = 1;
+  const int       m_StatusTagID      = 2;
+  const int       m_MaxLimitDice     = 7;
+  
+  int             m_NumberOfDice     = 2;
+  int             m_DiceHaveFallen   = 0;
+  
+  bool            m_bDisableRolls    = false;
+  
+  b2Vec2         *m_poGravity        = nullptr;
+  b2World        *m_poWorld          = nullptr;
+  b2Body         *m_poBody           = nullptr;
+  
+  CDice          *m_poDice_1         = nullptr;
+  CDice          *m_poDice_2         = nullptr;
+
+  CImageSprite   *m_poImage_1        = nullptr;
+  CImageSprite   *m_poImage_2        = nullptr;
+
+  CFloor         *m_poFloor          = nullptr;
+  CFloor         *m_poBoundry        = nullptr;
+  
   
 public:
-  
   MainScene();
   ~MainScene();
   
-  
+
   // there's no 'id' in cpp, so we recommend returning the class instance pointer
   static cocos2d::Scene* createScene();
 
@@ -59,8 +85,14 @@ public:
   void menuRollCallback(Object *pSender);
 
   void PlayButtonClick();
+  void PlayWinnerSound();
+  void PlaySorrySound();
+  void PlayRollingSound();
+  void StopRollingSound();
+  
   void Tick(float dt);
-  void CreateDice(Point oPoint);
+  void UpdateStatusDisplay(eStatusTypes eType);
+  void ProcessStatusInformation();
   
   bool TouchBegan(Touch *poTouch, Event *poEvent);
   
